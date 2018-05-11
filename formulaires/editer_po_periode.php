@@ -16,6 +16,92 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 include_spip('inc/actions');
 include_spip('inc/editer');
 
+function formulaires_editer_po_periode_saisies_dist() {
+
+	// Les jours de la semaine
+	$jours_semaines = array();
+	for ($i = 0; $i < 7; $i++) {
+		$jour = $i + 1;
+		$jours_semaines[] = _T('spip:date_jour_' . $jour);
+	}
+
+	return array(
+		array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'titre',
+				'datas' => $statuts,
+				'cacher_option_intro' => 'on',
+				'label' => _T('ecrire:info_titre'),
+			)
+		),
+		array(
+			'saisie' => 'textarea',
+			'options' => array(
+				'nom' => 'descriptif',
+				'label' => _T('ecrire:info_descriptif'),
+				'conteneur_class' => 'pleine_largeur',
+				'class' => 'inserer_barre_edition',
+				'rows' => 4
+			)
+		),
+		array(
+			'saisie' => 'radio',
+			'options' => array(
+				'nom' => 'type',
+				'label' => _T('po_periode:champ_type_label'),
+				'data' => array(
+					'date' => _T('po_periode:type_date'),
+					'jour_semaine' => _T('po_periode:type_jour_semaine'),
+					'jour_nombre' => _T('po_periode:type_jour_nombre'),
+				)
+			),
+		),
+		array(
+			'saisie' => 'date',
+			'options' => array(
+				'nom' => 'date_debut',
+				'label' => _T('po_periode:champ_date_debut_label'),
+				'afficher_si' => '@type@ == "date"',
+			)
+		),
+		array(
+			'saisie' => 'date',
+			'options' => array(
+				'nom' => 'date_fin',
+				'label' => _T('po_periode:champ_date_fin_label'),
+				'afficher_si' => '@type@ == "date"',
+			)
+		),
+		array(
+			'saisie' => 'selection',
+			'options' => array(
+				'nom' => 'jour_debut',
+				'label' => _T('po_periode:champ_jour_debut_label'),
+				'data' => $jours_semaines,
+				'afficher_si' => '@type@ == "jour_semaine"',
+			)
+		),
+		array(
+			'saisie' => 'selection',
+			'options' => array(
+				'nom' => 'jour_fin',
+				'label' => _T('po_periode:champ_jour_fin_label'),
+				'data' => $jours_semaines,
+				'afficher_si' => '@type@ == "jour_semaine"',
+			)
+		),
+		array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'jour_nombre',
+				'label' => _T('po_periode:champ_jour_nombre_label'),
+				'afficher_si' => '@type@ == "jour_nombre"',
+			)
+		),
+	);
+}
+
 
 /**
  * Identifier le formulaire en faisant abstraction des paramètres qui ne représentent pas l'objet edité
@@ -63,6 +149,12 @@ function formulaires_editer_po_periode_identifier_dist($id_po_periode = 'new', $
  */
 function formulaires_editer_po_periode_charger_dist($id_po_periode = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 	$valeurs = formulaires_editer_objet_charger('po_periode', $id_po_periode, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+
+	// Publier directement
+	if ($id_po_periode == 'oui') {
+		$valeurs['_hidden'] .= '<input type="hidden" name="statut" value="publie" />';
+	}
+
 	return $valeurs;
 }
 

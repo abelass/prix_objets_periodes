@@ -12,14 +12,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_lien_po_periode' => 'Ajouter cette période prix',
 
 	// C
-	'champ_date_debut_label' => 'Date début',
-	'champ_date_fin_label' => 'Date fin',
-	'champ_descriptif_label' => 'Déscriptif',
-	'champ_jour_debut_label' => 'Premier jour',
-	'champ_jour_fin_label' => 'Dernier jour',
-	'champ_jour_nombre_label' => 'Nombre de jours',
-	'champ_titre_label' => 'Titre',
-	'champ_type_label' => 'type',
+	'champ_date_debut_label' => 'Date début :',
+	'champ_date_fin_label' => 'Date fin :',
+	'champ_jour_debut_label' => 'Premier jour :',
+	'champ_jour_fin_label' => 'Dernier jour :',
+	'champ_jour_nombre_label' => 'Nombre de jours :',
+	'champ_type_label' => 'Type de période : ',
 	'confirmer_supprimer_po_periode' => 'Confirmez-vous la suppression de cette période prix ?',
 
 	// I
@@ -48,4 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_po_periode' => 'Période prix',
 	'titre_po_periodes' => 'Périodes prix',
 	'titre_po_periodes_rubrique' => 'Périodes prix de la rubrique',
+	'type_date' => 'Dates',
+	'type_jour_semaine' => 'Jour de semaine',
+	'type_jour_nombre' => 'Nombre de jour',
 );
