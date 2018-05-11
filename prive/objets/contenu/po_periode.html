@@ -1,0 +1,42 @@
+<BOUCLE_po_periode(PO_PERIODES){id_po_periode}{statut?}>
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:po_periode:champ_titre_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{titre} titre">(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<label><:po_periode:champ_descriptif_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{descriptif} descriptif">(#DESCRIPTIF)</span>
+</div>]
+
+[<div class="champ contenu_type[ (#TYPE*|strlen|?{'',vide})]">
+	<label><:po_periode:champ_type_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{type} type">(#TYPE)</span>
+</div>]
+
+[<div class="champ contenu_date_debut[ (#DATE_DEBUT*|!={0000-00-00 00:00:00}|?{'',vide})]">
+	<label><:po_periode:champ_date_debut_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{date_debut} date_debut">(#DATE_DEBUT|=={0000-00-00 00:00:00}|?{'',[(#DATE_DEBUT|affdate)]})</span>
+</div>]
+
+[<div class="champ contenu_date_fin[ (#DATE_FIN*|!={0000-00-00 00:00:00}|?{'',vide})]">
+	<label><:po_periode:champ_date_fin_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{date_fin} date_fin">(#DATE_FIN|=={0000-00-00 00:00:00}|?{'',[(#DATE_FIN|affdate)]})</span>
+</div>]
+
+[<div class="champ contenu_jour_debut[ (#JOUR_DEBUT*|strlen|?{'',vide})]">
+	<label><:po_periode:champ_jour_debut_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{jour_debut} jour_debut">(#JOUR_DEBUT)</span>
+</div>]
+
+[<div class="champ contenu_jour_fin[ (#JOUR_FIN*|strlen|?{'',vide})]">
+	<label><:po_periode:champ_jour_fin_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{jour_fin} jour_fin">(#JOUR_FIN)</span>
+</div>]
+
+[<div class="champ contenu_jour_nombre[ (#JOUR_NOMBRE*|strlen|?{'',vide})]">
+	<label><:po_periode:champ_jour_nombre_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{jour_nombre} jour_nombre">(#JOUR_NOMBRE)</span>
+</div>]
+
+</BOUCLE_po_periode>

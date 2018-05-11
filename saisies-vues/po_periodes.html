@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_po_periodes_selectionnes>
+	<ul>
+	<BOUCLE_po_periodes_selectionnes(PO_PERIODES){id_po_periode IN #GET*{valeur}}
+		{par num titre, titre}{statut?}{tout}>
+		<li class="choix">#TITRE (#ID_PO_PERIODE)</li>
+	</BOUCLE_po_periodes_selectionnes>
+	</ul>
+	</B_po_periodes_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_po_periodes_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_po_periode_selectionne(PO_PERIODES){id_po_periode=#ENV{valeur}}
+		{par num titre, titre}{statut?}{tout}>
+	  	<p>#TITRE (#ID_PO_PERIODE)</p>
+	</BOUCLE_po_periode_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_po_periode_selectionne>
+<//B_test_multiple>

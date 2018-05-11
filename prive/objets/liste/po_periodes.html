@@ -1,0 +1,39 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+	date,-1,
+	id_po_periode,1,
+	points,-1
+}})]<B_liste_po_periodes>
+#ANCRE_PAGINATION
+<div class="liste-objets po_periodes">
+<table class="spip liste">
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{po_periode:info_1_po_periode,po_periode:info_nb_po_periodes}})</strong></caption>]
+	<thead>
+		<tr class="first_row">
+			<th class="picto" scope="col"></th>
+			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class="titre" scope="col">[(#TRI{titre,<:po_periode:champ_titre_label:>,ajax})]</th>
+			<th class="date" scope="col">[(#TRI{date,<:date:>,ajax})]</th> 
+			<th class="id" scope="col">[(#TRI{id_po_periode,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_po_periodes(PO_PERIODES){id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="picto">[(#CHEMIN_IMAGE{po_periode-16.png}|balise_img)]</td>
+			<td class="statut">[(#STATUT|puce_statut{po_periode,#ID_PO_PERIODE})]</td> 
+			<td class="titre principale">[(#LOGO_PO_PERIODE|image_reduire{20,26})]<a href="[(#ID_PO_PERIODE|generer_url_entite{po_periode})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PO_PERIODE">[(#RANG). ]#TITRE</a></td>
+			<td class="date secondaire">[(#DATE|affdate_jourcourt)]</td> 
+			<td class="id">[(#AUTORISER{modifier,po_periode,#ID_PO_PERIODE}|?{
+				<a href="[(#URL_ECRIRE{po_periode_edit,id_po_periode=#ID_PO_PERIODE})]">#ID_PO_PERIODE</a>,
+				#ID_PO_PERIODE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_po_periodes>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION{prive})</p>]
+</div>
+</B_liste_po_periodes>[
+<div class="liste-objets po_periodes caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_po_periodes>
