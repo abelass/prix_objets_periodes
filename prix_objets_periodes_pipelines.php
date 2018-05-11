@@ -24,7 +24,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function prix_objets_periodes_prix_objets_extensions($flux) {
 
-	$flux['data'] = array (
+	$flux['data'][] = array (
 		array(
 			'objet' => 'po_periode',
 			'saisie' => 'po_periodes',
