@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'champ_date_debut_label' => 'Date début :',
 	'champ_date_fin_label' => 'Date fin :',
+	'champ_id_prix_extension_po_periode' => 'Choisissez une période pour ce prix :',
 	'champ_jour_debut_label' => 'Premier jour :',
 	'champ_jour_fin_label' => 'Dernier jour :',
 	'champ_jour_nombre_label' => 'Nombre de jours :',

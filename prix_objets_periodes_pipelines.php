@@ -13,15 +13,40 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-
-/*
- * Un fichier de pipelines permet de regrouper
- * les fonctions de branchement de votre plugin
- * sur des pipelines existants.
+/**
+ * Déclare les champs extras pour le formulaire prix.
+ *
+ * @pipeline prix_objets_extensions
+ *
+ * @param array $flux
+ *        	Données du pipeline
+ * @return array
  */
+function prix_objets_periodes_prix_objets_extensions($flux) {
 
+	$flux['data'] = array (
+		array(
+			'objet' => 'po_periode',
+			'saisie' => 'po_periodes',
+			'options' => array(
+				'nom' => 'id_prix_extension_po_periode',
+				'label' => _T('po_periode:champ_id_prix_extension_po_periode'),
+				'option_intro' => _T('po_periode:info_aucun_po_periode'),
+				'defaut' => $flux['id_prix_extension_objet'],
+			)
+		),
+		array(
+			'saisie' => 'ajouter_action',
+			'options' => array(
+				'nom' => 'ajouter_po_periode',
+				'label_action' => _T('po_periode:texte_ajouter_po_periode'),
+				'action' => 'po_periode_edit',
+			)
+		),
+	);
 
-
+	return $flux;
+}
 
 
 /**
