@@ -1,2 +1,2 @@
 # prix_objets_periodes
-Extension à prox_objets pour gérér des prixn selon des périodes
+Extension pour prix_objets pour gérér des prix selon des périodes
