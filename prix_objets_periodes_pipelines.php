@@ -24,15 +24,15 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function prix_objets_periodes_prix_objets_extensions($flux) {
 
-	$flux['data'][] = array (
+	$flux['data']['po_periode'] = array (
 		array(
-			'objet' => 'po_periode',
 			'saisie' => 'po_periodes',
 			'options' => array(
 				'nom' => 'id_prix_extension_po_periode',
 				'label' => _T('po_periode:champ_id_prix_extension_po_periode'),
 				'option_intro' => _T('po_periode:info_aucun_po_periode'),
 				'defaut' => $flux['id_prix_extension_objet'],
+				'multiple' => 'oui',
 			)
 		),
 		array(
