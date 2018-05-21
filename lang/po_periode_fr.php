@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_jour_debut_label' => 'Premier jour :',
 	'champ_jour_fin_label' => 'Dernier jour :',
 	'champ_jour_nombre_label' => 'Nombre de jours :',
+	'champ_operateur_label' => 'Opérateur :',
 	'champ_type_label' => 'Type de période : ',
 	'confirmer_supprimer_po_periode' => 'Confirmez-vous la suppression de cette période prix ?',
 

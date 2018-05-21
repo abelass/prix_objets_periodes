@@ -15,9 +15,19 @@
 </div>
 
 [(#TYPE|=={date}|oui)
+[<div class="champ contenu_operateur[ (#OPERATEUR*|!={0000-00-00 00:00:00}|?{'',vide})]">
+	<label><:po_periode:champ_operateur_label:></label>
+	<span dir="#LANG_DIR" class="#EDIT{operateur} operateur">(#OPERATEUR)</span>
+</div>]
+
 [<div class="champ contenu_date_debut[ (#DATE_DEBUT*|!={0000-00-00 00:00:00}|?{'',vide})]">
-	<label><:po_periode:champ_date_debut_label:> : </label>
+	<label><:po_periode:champ_date_debut_label:></label>
 	<span dir="#LANG_DIR" class="#EDIT{date_debut} date_debut">(#DATE_DEBUT|=={0000-00-00 00:00:00}|?{'',[(#DATE_DEBUT|affdate)]})</span>
+</div>]
+
+[<div class="champ contenu_operateur_2[ (#OPERATEUR_2*|!={0000-00-00 00:00:00}|?{'',vide})]">
+	<label><:po_periode:champ_operateur_label:></label>
+	<span dir="#LANG_DIR" class="#EDIT{operateur_2} operateur_2">(#OPERATEUR_2)</span>
 </div>]
 
 [<div class="champ contenu_date_fin[ (#DATE_FIN*|!={0000-00-00 00:00:00}|?{'',vide})]">
@@ -41,6 +51,11 @@
 ]
 
 [(#TYPE|=={jour_nombre}|oui)
+[<div class="champ contenu_operateur[ (#OPERATEUR*|!={0000-00-00 00:00:00}|?{'',vide})]">
+	<label><:po_periode:champ_operateur_label:></label>
+	<span dir="#LANG_DIR" class="#EDIT{operateur} operateur">(#OPERATEUR|=={0000-00-00 00:00:00}|?{'',[(#OPERATEUR|affdate)]})</span>
+</div>]
+
 [<div class="champ contenu_jour_nombre[ (#JOUR_NOMBRE*|strlen|?{'',vide})]">
 	<label><:po_periode:champ_jour_nombre_label:></label>
 	<span dir="#LANG_DIR" class="#EDIT{jour_nombre} jour_nombre">(#JOUR_NOMBRE)</span>

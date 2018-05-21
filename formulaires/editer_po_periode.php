@@ -25,6 +25,15 @@ function formulaires_editer_po_periode_saisies_dist() {
 		$jours_semaines[] = _T('spip:date_jour_' . $jour);
 	}
 
+	$operateurs = array(
+		'=' => '=',
+		'!=' => '!=',
+		'<' => '<',
+		'<=' => '<=',
+		'>' => '>',
+		'>=' => '>=',
+	);
+
 	return array(
 		array(
 			'saisie' => 'input',
@@ -58,10 +67,28 @@ function formulaires_editer_po_periode_saisies_dist() {
 			),
 		),
 		array(
+			'saisie' => 'selection',
+			'options' => array(
+				'nom' => 'operateur',
+				'label' => _T('po_periode:champ_operateur_label'),
+				'data' => $operateurs,
+				'afficher_si' => '@type@ == "date" || @type@ == "jour_nombre"',
+			)
+		),
+		array(
 			'saisie' => 'date',
 			'options' => array(
 				'nom' => 'date_debut',
 				'label' => _T('po_periode:champ_date_debut_label'),
+				'afficher_si' => '@type@ == "date"',
+			)
+		),
+		array(
+			'saisie' => 'selection',
+			'options' => array(
+				'nom' => 'operateur_2',
+				'label' => _T('po_periode:champ_operateur_label'),
+				'data' => $operateurs,
 				'afficher_si' => '@type@ == "date"',
 			)
 		),
