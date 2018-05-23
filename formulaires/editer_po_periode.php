@@ -26,12 +26,12 @@ function formulaires_editer_po_periode_saisies_dist() {
 	}
 
 	$operateurs = array(
-		'=' => '=',
-		'!=' => '!=',
-		'<' => '<',
-		'<=' => '<=',
-		'>' => '>',
-		'>=' => '>=',
+		htmlspecialchars('==') => '=',
+		htmlspecialchars('!=') => '!=',
+		htmlspecialchars('<') => '<',
+		htmlspecialchars('<=') => '<=',
+		htmlspecialchars('>') => '>',
+		htmlspecialchars('>=') => '>=',
 	);
 
 	return array(
@@ -181,7 +181,7 @@ function formulaires_editer_po_periode_charger_dist($id_po_periode = 'new', $ret
 	if ($id_po_periode == 'oui') {
 		$valeurs['_hidden'] .= '<input type="hidden" name="statut" value="publie" />';
 	}
-
+print_r($valeurs);
 	return $valeurs;
 }
 
