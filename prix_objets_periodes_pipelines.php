@@ -39,7 +39,7 @@ function prix_objets_periodes_prix_objets_extensions($flux) {
 			'saisie' => 'ajouter_action',
 			'options' => array(
 				'nom' => 'ajouter_po_periode',
-				'label_action' => _T('po_periode:texte_ajouter_po_periode'),
+				'label_action' => _T('po_periode:icone_creer_po_periode'),
 				'action' => 'po_periode_edit',
 			)
 		),
