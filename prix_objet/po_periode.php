@@ -42,8 +42,7 @@ function prix_objet_po_periode_dist($id_po_periode, $contexte) {
 	$type = trim($donnees_periode['type']);
 	$operateur = !empty($donnees_periode['operateur']) ? $donnees_periode['operateur'] : '==';
 	$operateur_2 = !empty($donnees_periode['operateur_2']) ? $donnees_periode['operateur_2'] : '==';
-	//echo "applicable: $applicable";
-	print "$type <br>";
+
 	switch ($type) {
 		case 'date':
 			if(po_condition($date_debut_contexte,$operateur,$donnees_periode['date_debut']) and
@@ -63,18 +62,18 @@ function prix_objet_po_periode_dist($id_po_periode, $contexte) {
 					}
 			break;
 		case 'jour_nombre':
-			$jour_nombre_contexte = 0;
-			//if($date_debut_contexte > 0) {
+			$fin = strtotime(date('Y-m-d', strtotime($date_fin_contexte)));
+			$debut = strtotime(date('Y-m-d', strtotime($date_debut_contexte)));
+			if ($fin >= $debut) {
+				$difference_date = $fin - $debut;
+				$nombre_jours_contexte = $difference_date / (60 * 60 * 24);
+				$nombre_jours = $donnees_periode['jour_nombre'];
 
-			$fin = date('Y-m-d', strtotime($date_fin_contexte));
-			$debut = date('Y-m-d', strtotime($date_debut_contexte));
-			$difference_date = strtotime($fin) - strtotime($debut);
-			$jour_nombre_contexte = $difference_date / (60 * 60 * 24);
-			$nombre_jours = $donnees_periode['jour_nombre'];
-
-			if (po_condition($jour_nombre_contexte, $operateur, $nombre_jours)) {
-				$applicable = TRUE;
+				if (po_condition($nombre_jours_contexte, $operateur, $nombre_jours)) {
+					$applicable = TRUE;
+				}
 			}
+
 			break;
 	}
 
