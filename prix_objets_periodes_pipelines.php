@@ -32,6 +32,7 @@ function prix_objets_periodes_prix_objets_extensions($flux) {
 				'label' => _T('po_periode:champ_id_prix_extension_po_periode'),
 				'option_intro' => _T('po_periode:info_aucun_po_periode'),
 				'defaut' => $flux['id_prix_extension_objet'],
+				'class' => 'chosen',
 				'multiple' => 'oui',
 			)
 		),
@@ -40,7 +41,7 @@ function prix_objets_periodes_prix_objets_extensions($flux) {
 			'options' => array(
 				'nom' => 'ajouter_po_periode',
 				'label_action' => _T('po_periode:texte_ajouter_po_periode'),
-				'action' => 'po_periode_edit',
+				'objet' => 'po_periode',
 			)
 		),
 	);
