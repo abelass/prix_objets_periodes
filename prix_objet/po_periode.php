@@ -39,21 +39,21 @@ function prix_objet_po_periode_dist($id_po_periode, $contexte) {
 
 	$donnees_periode = sql_fetsel('*', 'spip_po_periodes', 'id_po_periode=' . $id_po_periode);
 
-	$type = $donnes_periode['type'];
+	$type = trim($donnees_periode['type']);
 	$operateur = !empty($donnees_periode['operateur']) ? $donnees_periode['operateur'] : '==';
 	$operateur_2 = !empty($donnees_periode['operateur_2']) ? $donnees_periode['operateur_2'] : '==';
 
 	switch ($type) {
 		case 'date':
 			if(po_condition($date_debut_contexte,$operateur,$donnees_periode['date_debut']) and
-			po_condition($date_fin_contexte,$operateur,$donnees_periode['date_fin'])) {
+			po_condition($date_fin_contexte,$operateur_2,$donnees_periode['date_fin'])) {
 				$applicable = TRUE;
 			}
-
 			break;
 		case 'jour_semaine':
-			$jour_debut_contexte = date('w', $date_debut_contexte);
-			$jour_fin_contexte = date('w', $date_fin_contexte);
+
+			$jour_debut_contexte = date('w', strtotime($date_debut_contexte));
+			$jour_fin_contexte = date('w', strtotime($date_fin_contexte));
 
 			if($jour_debut_contexte == $donnees_periode['jour_debut'] and
 					$jour_fin_contexte == $donnees_periode['jour_fin']
@@ -62,15 +62,18 @@ function prix_objet_po_periode_dist($id_po_periode, $contexte) {
 					}
 			break;
 		case 'jour_nombre':
-			$jour_nombre_contexte = 0;
-			if($date_debut_contexte < 0) {
-				$difference_date = $date_debut_contexte - $date_debut_contexte;
-				$jour_nombre_contexte = round($difference_date / (60 * 60 * 24));
+			$fin = strtotime(date('Y-m-d', strtotime($date_fin_contexte)));
+			$debut = strtotime(date('Y-m-d', strtotime($date_debut_contexte)));
+			if ($fin >= $debut) {
+				$difference_date = $fin - $debut;
+				$nombre_jours_contexte = $difference_date / (60 * 60 * 24);
+				$nombre_jours = $donnees_periode['jour_nombre'];
+
+				if (po_condition($nombre_jours_contexte, $operateur, $nombre_jours)) {
+					$applicable = TRUE;
+				}
 			}
 
-			if(po_condition($nombre_jours,$operateur,$donnees_periode['jour_nombre'])) {
-				$applicable = TRUE;
-			}
 			break;
 	}
 
