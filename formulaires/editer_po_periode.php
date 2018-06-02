@@ -26,7 +26,7 @@ function formulaires_editer_po_periode_saisies_dist() {
 	}
 
 	$operateurs = array(
-		htmlspecialchars('==') => '=',
+		htmlspecialchars('==') => '==',
 		htmlspecialchars('!=') => '!=',
 		htmlspecialchars('<') => '<',
 		htmlspecialchars('<=') => '<=',
@@ -88,7 +88,7 @@ function formulaires_editer_po_periode_saisies_dist() {
 				'nom' => 'operateur',
 				'label' => _T('po_periode:champ_operateur_label'),
 				'data' => $operateurs,
-				'afficher_si' => '(@type@ == "date" || @type@ == "jour_nombre"  || @type@ == "jour_semaine") && @criteres@ == "specifique"',
+				'afficher_si' => '(@type@ == "date" || @type@ == "jour_nombre") && @criteres@ == "specifique"',
 			)
 		),
 		array(

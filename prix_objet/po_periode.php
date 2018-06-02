@@ -20,7 +20,7 @@ if (!defined('_ECRIRE_INC_VERSION'))
  * @param array $contexte
  * @return boolean
  */
-function prix_objet_po_periode_dist($id_po_periode, $contexte) {
+function prix_objet_po_periode_dist($id_po_periode, $contexte = array()) {
 	$date = date('Y-m-d H:s:m', time());
 	$date_debut_contexte = isset($contexte['date_debut']) ?
 		$contexte['date_debut'] :
@@ -50,7 +50,7 @@ function prix_objet_po_periode_dist($id_po_periode, $contexte) {
 		case 'date':
 			switch ($criteres) {
 				case 'coincide' :
-					if (($date_debut_contexte <= $date_debut_periode) and ($date_fin_contexte >= $date_debut_periode)) {
+					if (($date_debut_contexte <= $date_fin_periode) and ($date_fin_contexte >= $date_debut_periode)) {
 						$applicable = TRUE;
 					}
 					break;
@@ -68,15 +68,32 @@ function prix_objet_po_periode_dist($id_po_periode, $contexte) {
 			}
 			break;
 		case 'jour_semaine':
-
+			$jour_debut_periode = $donnees_periode['jour_debut'];
+			$jour_fin_periode = $donnees_periode['jour_fin'];
 			$jour_debut_contexte = date('w', strtotime($date_debut_contexte));
 			$jour_fin_contexte = date('w', strtotime($date_fin_contexte));
+			$dates_periode = array($jour_debut_periode, $jour_fin_periode);
+			$dates_intervalle = dates_intervalle($date_debut_contexte, $date_fin_contexte, 0, 0, FALSE, 'w');
+			$coincidences = array_intersect($dates_periode, $dates_intervalle);
 
-			if($jour_debut_contexte == $donnees_periode['jour_debut'] and
-					$jour_fin_contexte == $donnees_periode['jour_fin']
-					) {
-				$applicable = TRUE;
+			switch ($criteres) {
+				case 'coincide' :
+					if(count($coincidences) > 0) {
+						$applicable = TRUE;
 					}
+					break;
+				case 'exclu' :
+					if(count($coincidences) == 0) {
+						$applicable = TRUE;
+					}
+					break;
+				case 'specifique' :
+					if($jour_debut_contexte == $jour_debut_periode and
+						$jour_fin_contexte == $jour_fin_periode) {
+						$applicable = TRUE;
+					}
+					break;
+			}
 			break;
 		case 'jour_nombre':
 			$fin = strtotime(date('Y-m-d', strtotime($date_fin_contexte)));
