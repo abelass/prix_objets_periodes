@@ -39,6 +39,7 @@ function formulaires_editer_po_periode_saisies_dist() {
 			'saisie' => 'input',
 			'options' => array(
 				'nom' => 'titre',
+				'obligatoire' => 'oui',
 				'datas' => $statuts,
 				'cacher_option_intro' => 'on',
 				'label' => _T('ecrire:info_titre'),
@@ -57,6 +58,7 @@ function formulaires_editer_po_periode_saisies_dist() {
 		array(
 			'saisie' => 'radio',
 			'options' => array(
+				'obligatoire' => 'oui',
 				'nom' => 'type',
 				'label' => _T('po_periode:champ_type_label'),
 				'data' => array(
@@ -69,10 +71,24 @@ function formulaires_editer_po_periode_saisies_dist() {
 		array(
 			'saisie' => 'selection',
 			'options' => array(
+				'nom' => 'criteres',
+				'label' => _T('po_periode:champ_criteres_label'),
+				'obligatoire' => 'oui',
+				'data' => array(
+					'coincide' => _T('po_periode:choix_coincide_label'),
+					'exclu' => _T('po_periode:choix_exclu_label'),
+					'specifique' => _T('po_periode:choix_specifique_label'),
+				),
+				'afficher_si' => '@type@ == "date" || @type@ == "jour_semaine"',
+			)
+		),
+		array(
+			'saisie' => 'selection',
+			'options' => array(
 				'nom' => 'operateur',
 				'label' => _T('po_periode:champ_operateur_label'),
 				'data' => $operateurs,
-				'afficher_si' => '@type@ == "date" || @type@ == "jour_nombre"',
+				'afficher_si' => '(@type@ == "date" || @type@ == "jour_nombre"  || @type@ == "jour_semaine") && @criteres@ == "specifique"',
 			)
 		),
 		array(
@@ -89,7 +105,7 @@ function formulaires_editer_po_periode_saisies_dist() {
 				'nom' => 'operateur_2',
 				'label' => _T('po_periode:champ_operateur_label'),
 				'data' => $operateurs,
-				'afficher_si' => '@type@ == "date"',
+				'afficher_si' => '@type@ == "date" && @criteres@ == "specifique"',
 			)
 		),
 		array(
@@ -225,7 +241,7 @@ function formulaires_editer_po_periode_verifier_dist($id_po_periode = 'new', $re
 		}
 	}
 
-	$erreurs += formulaires_editer_objet_verifier('po_periode', $id_po_periode, array('titre', 'type'));
+	$erreurs += formulaires_editer_objet_verifier('po_periode', $id_po_periode, array('titre', 'type', 'criteres'));
 
 	return $erreurs;
 }

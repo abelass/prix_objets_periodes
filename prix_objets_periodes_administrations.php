@@ -53,6 +53,7 @@ function prix_objets_periodes_upgrade($nom_meta_base_version, $version_cible) {
 
 	$maj['create'] = array(array('maj_tables', array('spip_po_periodes')));
 	$maj['1.0.1'] = array(array('maj_tables', array('spip_po_periodes')));
+	$maj['1.0.2'] = array(array('maj_tables', array('spip_po_periodes')));
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

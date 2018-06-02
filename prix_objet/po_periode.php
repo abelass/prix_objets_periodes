@@ -40,14 +40,31 @@ function prix_objet_po_periode_dist($id_po_periode, $contexte) {
 	$donnees_periode = sql_fetsel('*', 'spip_po_periodes', 'id_po_periode=' . $id_po_periode);
 
 	$type = trim($donnees_periode['type']);
+	$criteres = $donnees_periode['criteres'];
 	$operateur = !empty($donnees_periode['operateur']) ? $donnees_periode['operateur'] : '==';
 	$operateur_2 = !empty($donnees_periode['operateur_2']) ? $donnees_periode['operateur_2'] : '==';
+	$date_debut_periode = $donnees_periode['date_debut'];
+	$date_fin_periode = $donnees_periode['date_fin'];
 
 	switch ($type) {
 		case 'date':
-			if(po_condition($date_debut_contexte,$operateur,$donnees_periode['date_debut']) and
-			po_condition($date_fin_contexte,$operateur_2,$donnees_periode['date_fin'])) {
-				$applicable = TRUE;
+			switch ($criteres) {
+				case 'coincide' :
+					if (($date_debut_contexte <= $date_debut_periode) and ($date_fin_contexte >= $date_debut_periode)) {
+						$applicable = TRUE;
+					}
+					break;
+				case 'exclu' :
+					if (($date_debut_contexte > $date_fin_periode) or ($date_fin_contexte < $date_debut_periode)) {
+						$applicable = TRUE;
+					}
+					break;
+				case 'specifique' :
+					if(po_condition($date_debut_contexte, $operateur, $date_debut_periode) and
+					po_condition($date_fin_contexte, $operateur_2, $date_fin_periode)) {
+							$applicable = TRUE;
+						}
+					break;
 			}
 			break;
 		case 'jour_semaine':

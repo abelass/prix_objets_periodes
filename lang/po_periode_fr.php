@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_lien_po_periode' => 'Ajouter cette période prix',
 
 	// C
+	'champ_criteres_label' => 'Critères de sélection : ',
 	'champ_date_debut_label' => 'Date début :',
 	'champ_date_fin_label' => 'Date fin :',
 	'champ_id_prix_extension_po_periode' => 'Choisissez une période pour ce prix :',
@@ -20,6 +21,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_jour_nombre_label' => 'Nombre de jours :',
 	'champ_operateur_label' => 'Opérateur :',
 	'champ_type_label' => 'Type de période : ',
+	'choix_coincide_label' => 'Coïncidence (période contient au moins un date)',
+	'choix_exclu_label' => 'Exclus (au moins un date es cpmpris)',
+	'choix_specifique_label' => 'Choix spécifique',
 	'confirmer_supprimer_po_periode' => 'Confirmez-vous la suppression de cette période prix ?',
 
 	// I

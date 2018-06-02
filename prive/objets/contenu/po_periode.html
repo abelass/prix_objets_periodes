@@ -14,6 +14,11 @@
 	<span dir="#LANG_DIR" class="#EDIT{type} type">[(#VAL{po_periode:type_#TYPE}|_T)]</span>
 </div>
 
+<div class="champ criteres[ (#CRITERES*|strlen|?{'',vide})]">
+	<label><:po_periode:champ_criteres_label:></label>
+	<span dir="#LANG_DIR" class="#EDIT{criteres} criteres">[(#VAL{po_periode:choix_#CRITERES|concat{_label}}|_T)]</span>
+</div>
+
 [(#TYPE|=={date}|oui)
 [<div class="champ contenu_operateur[ (#OPERATEUR*|!={0000-00-00 00:00:00}|?{'',vide})]">
 	<label><:po_periode:champ_operateur_label:></label>
