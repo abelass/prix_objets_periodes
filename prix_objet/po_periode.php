@@ -17,25 +17,16 @@ if (!defined('_ECRIRE_INC_VERSION'))
  * Détermine si une extension est applicable pour un objet
  *
  * @param integer $id_po_periode
+ * @param integer $prix
  * @param array $contexte
- * @return boolean
+ *
+ * @return string si applicable le prix, sino rien
  */
-function prix_objet_po_periode_dist($id_po_periode, $contexte = array()) {
+function prix_objet_po_periode_dist($id_po_periode, $prix, $contexte = array()) {
 	$date = date('Y-m-d H:s:m', time());
-	$date_debut_contexte = isset($contexte['date_debut']) ?
-		$contexte['date_debut'] :
-		(_request('date_debut') ?
-			_request('date_debut') :
-			$date
-		);
-	$date_fin_contexte = isset($contexte['date_fin']) ?
-		$contexte['date_fin'] :
-		(
-			_request('date_fin') ?
-			_request('date_fin') :
-			$date
-		);
-	$applicable = FALSE;
+	$date_debut_contexte = isset($contexte['date_debut']) ? $contexte['date_debut'] : (_request('date_debut') ? _request('date_debut') : $date);
+	$date_fin_contexte = isset($contexte['date_fin']) ? $contexte['date_fin'] : (_request('date_fin') ? _request('date_fin') : $date);
+	$prix_applicable = '';
 
 	$donnees_periode = sql_fetsel('*', 'spip_po_periodes', 'id_po_periode=' . $id_po_periode);
 
@@ -49,21 +40,20 @@ function prix_objet_po_periode_dist($id_po_periode, $contexte = array()) {
 	switch ($type) {
 		case 'date':
 			switch ($criteres) {
-				case 'coincide' :
+				case 'coincide':
 					if (($date_debut_contexte <= $date_fin_periode) and ($date_fin_contexte >= $date_debut_periode)) {
-						$applicable = TRUE;
+						$prix_applicable = $prix;
 					}
 					break;
-				case 'exclu' :
+				case 'exclu':
 					if (($date_debut_contexte > $date_fin_periode) or ($date_fin_contexte < $date_debut_periode)) {
-						$applicable = TRUE;
+						$prix_applicable = $prix;
 					}
 					break;
-				case 'specifique' :
-					if(po_condition($date_debut_contexte, $operateur, $date_debut_periode) and
-					po_condition($date_fin_contexte, $operateur_2, $date_fin_periode)) {
-							$applicable = TRUE;
-						}
+				case 'specifique':
+					if (po_condition($date_debut_contexte, $date_debut_periode, $operateur) and po_condition($date_fin_contexte, $date_fin_periode, $operateur_2)) {
+						$prix_applicable = $prix;
+					}
 					break;
 			}
 			break;
@@ -72,25 +62,27 @@ function prix_objet_po_periode_dist($id_po_periode, $contexte = array()) {
 			$jour_fin_periode = $donnees_periode['jour_fin'];
 			$jour_debut_contexte = date('w', strtotime($date_debut_contexte));
 			$jour_fin_contexte = date('w', strtotime($date_fin_contexte));
-			$dates_periode = array($jour_debut_periode, $jour_fin_periode);
+			$dates_periode = array(
+				$jour_debut_periode,
+				$jour_fin_periode
+			);
 			$dates_intervalle = dates_intervalle($date_debut_contexte, $date_fin_contexte, 0, 0, FALSE, 'w');
 			$coincidences = array_intersect($dates_periode, $dates_intervalle);
 
 			switch ($criteres) {
-				case 'coincide' :
-					if(count($coincidences) > 0) {
-						$applicable = TRUE;
+				case 'coincide':
+					if (count($coincidences) > 0) {
+						$prix_applicable = $prix;
 					}
 					break;
-				case 'exclu' :
-					if(count($coincidences) == 0) {
-						$applicable = TRUE;
+				case 'exclu':
+					if (count($coincidences) == 0) {
+						$prix_applicable = $prix;
 					}
 					break;
-				case 'specifique' :
-					if($jour_debut_contexte == $jour_debut_periode and
-						$jour_fin_contexte == $jour_fin_periode) {
-						$applicable = TRUE;
+				case 'specifique':
+					if ($jour_debut_contexte == $jour_debut_periode and $jour_fin_contexte == $jour_fin_periode) {
+						$prix_applicable = $prix;
 					}
 					break;
 			}
@@ -103,33 +95,44 @@ function prix_objet_po_periode_dist($id_po_periode, $contexte = array()) {
 				$nombre_jours_contexte = $difference_date / (60 * 60 * 24);
 				$nombre_jours = $donnees_periode['jour_nombre'];
 
-				if (po_condition($nombre_jours_contexte, $operateur, $nombre_jours)) {
-					$applicable = TRUE;
+				if (po_condition($nombre_jours_contexte, $nombre_jours, $operateur)) {
+					$prix_applicable = $prix;
 				}
 			}
 
 			break;
 	}
 
-	return $applicable;
+	return $prix_applicable;
 }
 
-
-function po_condition($var1, $op, $var2) {
-
-	switch ($op) {
+/**
+ * Teste deux valeurs avec l'opérateur donné.
+ *
+ * @param integer $valeur1
+ *        	Première Valeur à tester
+ * @param integer $valeur2
+ *        	Deuxième Valeur à tester
+ * @param string  $operateur
+ *        	L'opérateur à utiliser
+ *
+ * @return boolean
+ *        	True si le teste est positive.
+ */
+function po_condition($valeur1, $valeur2, $operateur) {
+	switch ($operateur) {
 		case "=":
-			return $var1 == $var2;
+			return $valeur1 == $valeur2;
 		case "!=":
-			return $var1 != $var2;
+			return $valeur1 != $valeur2;
 		case ">=":
-			return $var1 >= $var2;
+			return $valeur1 >= $valeur2;
 		case "<=":
-			return $var1 <= $var2;
+			return $valeur1 <= $valeur2;
 		case ">":
-			return $var1 >  $var2;
+			return $valeur1 > $valeur2;
 		case "<":
-			return $var1 <  $var2;
+			return $valeur1 < $valeur2;
 		default:
 			return true;
 	}
