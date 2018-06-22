@@ -19,10 +19,14 @@ if (!defined('_ECRIRE_INC_VERSION'))
  * @param integer $id_po_periode
  * @param integer $prix
  * @param array $contexte
+ * @param string $mode
+ *        	Mode de calcul de prix (global ou prorata)
+ * @param array $sequence
+ *        	période pour le calcul des prix prorata
  *
  * @return string si applicable le prix, sino rien
  */
-function prix_objet_po_periode_dist($id_po_periode, $prix, $contexte = array()) {
+function prix_objet_po_periode_dist($id_po_periode, $prix, $contexte = array(), $mode, $sequence = array()) {
 	$date = date('Y-m-d H:s:m', time());
 	$date_debut_contexte = isset($contexte['date_debut']) ? $contexte['date_debut'] : (_request('date_debut') ? _request('date_debut') : $date);
 	$date_fin_contexte = isset($contexte['date_fin']) ? $contexte['date_fin'] : (_request('date_fin') ? _request('date_fin') : $date);
@@ -113,11 +117,10 @@ function prix_objet_po_periode_dist($id_po_periode, $prix, $contexte = array()) 
  *        	Première Valeur à tester
  * @param integer $valeur2
  *        	Deuxième Valeur à tester
- * @param string  $operateur
+ * @param string $operateur
  *        	L'opérateur à utiliser
  *
- * @return boolean
- *        	True si le teste est positive.
+ * @return boolean True si le teste est positive.
  */
 function po_condition($valeur1, $valeur2, $operateur) {
 	switch ($operateur) {
