@@ -38,7 +38,6 @@ function prix_objet_po_periode_dist($id_po_periode, $contexte = array()) {
 	$applicable = FALSE;
 
 	$donnees_periode = sql_fetsel('*', 'spip_po_periodes', 'id_po_periode=' . $id_po_periode);
-//spip_log("$id_po_periode: $date_debut_contexte - $date_fin_contexte", 'teste');
 	$type = trim($donnees_periode['type']);
 	$criteres = $donnees_periode['criteres'];
 	$operateur = !empty($donnees_periode['operateur']) ? $donnees_periode['operateur'] : '==';
@@ -53,7 +52,6 @@ function prix_objet_po_periode_dist($id_po_periode, $contexte = array()) {
 
 					if (($date_debut_contexte <= $date_fin_periode) and ($date_fin_contexte >= $date_debut_periode)) {
 						$applicable = TRUE;
-						spip_log("($date_debut_contexte <= $date_fin_periode) and ($date_fin_contexte >= $date_debut_periode)", 'teste');
 					}
 					break;
 				case 'exclu' :
