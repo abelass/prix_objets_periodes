@@ -77,12 +77,12 @@ function formulaires_editer_po_periode_saisies_dist() {
 				'data' => array(
 					'coincide' => _T('po_periode:choix_coincide_label'),
 					'exclu' => _T('po_periode:choix_exclu_label'),
-					'specifique' => _T('po_periode:choix_specifique_label'),
+					//'specifique' => _T('po_periode:choix_specifique_label'),
 				),
 				'afficher_si' => '@type@ == "date" || @type@ == "jour_semaine"',
 			)
 		),
-		array(
+		/*array(
 			'saisie' => 'selection',
 			'options' => array(
 				'nom' => 'operateur',
@@ -90,7 +90,7 @@ function formulaires_editer_po_periode_saisies_dist() {
 				'data' => $operateurs,
 				'afficher_si' => '(@type@ == "date" || @type@ == "jour_nombre") && @criteres@ == "specifique"',
 			)
-		),
+		),*/
 		array(
 			'saisie' => 'date',
 			'options' => array(
@@ -99,7 +99,7 @@ function formulaires_editer_po_periode_saisies_dist() {
 				'afficher_si' => '@type@ == "date"',
 			)
 		),
-		array(
+		/*array(
 			'saisie' => 'selection',
 			'options' => array(
 				'nom' => 'operateur_2',
@@ -107,7 +107,7 @@ function formulaires_editer_po_periode_saisies_dist() {
 				'data' => $operateurs,
 				'afficher_si' => '@type@ == "date" && @criteres@ == "specifique"',
 			)
-		),
+		),*/
 		array(
 			'saisie' => 'date',
 			'options' => array(

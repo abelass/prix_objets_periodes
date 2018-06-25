@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_operateur_label' => 'Opérateur :',
 	'champ_type_label' => 'Type de période : ',
 	'choix_coincide_label' => 'Coïncidence (période contient au moins un date)',
-	'choix_exclu_label' => 'Exclus (au moins un date es cpmpris)',
+	'choix_exclu_label' => 'Exclus (pérdiode ne contient aucune date)',
 	'choix_specifique_label' => 'Choix spécifique',
 	'confirmer_supprimer_po_periode' => 'Confirmez-vous la suppression de cette période de prix ?',
 
