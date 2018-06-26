@@ -1,5 +1,5 @@
 # Périodes de prix
-Extension pour prix_objets qui permet de définir un prix par rapport à une période de temps.
+Extension pour [prix_objets](https://plugins.spip.net/prix_objets) qui permet de définir un prix par rapport à une période de temps.
 
 ## Dépendances
 - [saisies](https://plugins.spip.net/saisies.html)
@@ -16,7 +16,7 @@ Choissiez d'abord le type de période :
 - Jour de semaine
 
 Puis définissez si le prix doit s'appliquer quand:
-- il y a `coîncidence` entre les dates soumises et celle de la période définie
+- il y a `coïncidence` entre les dates soumises et celle de la période définie.
 - les dates soumises sont `exclues` de la période définie.
 
 Ensuite déterminez la période (date début/ fin ou bien jour début/fin)
@@ -25,7 +25,7 @@ Ensuite déterminez la période (date début/ fin ou bien jour début/fin)
 Définissez les prix en choissisant les périodes définies. Vous pouvez choisir plusieurs
 périodes à la fois
 
-###Utilisation dans votre code
+### Utilisation dans votre code
 Le plugin prix_objets fourni un filtre/fonction `prix_par_objet` qui permet de calculer le prix d'un objet en
 tenant compte des extensions définis.
 
