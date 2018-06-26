@@ -64,7 +64,7 @@ function formulaires_editer_po_periode_saisies_dist() {
 				'data' => array(
 					'date' => _T('po_periode:type_date'),
 					'jour_semaine' => _T('po_periode:type_jour_semaine'),
-					'jour_nombre' => _T('po_periode:type_jour_nombre'),
+					//'jour_nombre' => _T('po_periode:type_jour_nombre'),
 				)
 			),
 		),
