@@ -11,9 +11,10 @@
 	<thead>
 		<tr class="first_row">
 			<th class="picto" scope="col"></th>
-			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
 			<th class="titre" scope="col">[(#TRI{titre,<:ecrire:info_titre:>,ajax})]</th>
-			<th class="date" scope="col">[(#TRI{date,<:date:>,ajax})]</th> 
+			<th class="dates" scope="col"><:po_periode:periode_label:></th>
+			<th class="criteres" scope="col"><:po_periode:champ_criteres_label:></th>
 			<th class="id" scope="col">[(#TRI{id_po_periode,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
@@ -21,9 +22,19 @@
 	<BOUCLE_liste_po_periodes(PO_PERIODES){id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="picto">[(#CHEMIN_IMAGE{po_periode-16.png}|balise_img)]</td>
-			<td class="statut">[(#STATUT|puce_statut{po_periode,#ID_PO_PERIODE})]</td> 
+			<td class="statut">[(#STATUT|puce_statut{po_periode,#ID_PO_PERIODE})]</td>
 			<td class="titre principale">[(#LOGO_PO_PERIODE|image_reduire{20,26})]<a href="[(#ID_PO_PERIODE|generer_url_entite{po_periode})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PO_PERIODE">[(#RANG). ]#TITRE</a></td>
-			<td class="date secondaire">[(#DATE|affdate_jourcourt)]</td> 
+			<td class="dates">
+				[(#DATE_DEBUT|!={0000-00-00 00:00:00}|?{
+					[(#DATE_DEBUT|dates_affdate_debut_fin{#DATE_FIN,#HORAIRE})],
+					[(#JOUR_DEBUT|strlen|oui)
+						#SET{jour_debut, #JOUR_DEBUT|plus{1}}
+						#SET{jour_fin, #JOUR_FIN|plus{1}}
+						[(#VAL{spip:date_jour_#GET{jour_debut}}|_T)][ - (#JOUR_FIN|strlen|oui)[ (#VAL{spip:date_jour_#GET{jour_fin}}|_T)]]
+					]
+				})]
+			</td>
+			<td class="criteres">[(#VAL{po_periode:titre_choix_#CRITERES}|_T)]</td>
 			<td class="id">[(#AUTORISER{modifier,po_periode,#ID_PO_PERIODE}|?{
 				<a href="[(#URL_ECRIRE{po_periode_edit,id_po_periode=#ID_PO_PERIODE})]">#ID_PO_PERIODE</a>,
 				#ID_PO_PERIODE

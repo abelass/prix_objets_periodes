@@ -13,8 +13,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'champ_criteres_label' => 'Critères de sélection : ',
-	'champ_date_debut_label' => 'Date début :',
-	'champ_date_fin_label' => 'Date fin :',
 	'champ_id_prix_extension_po_periode' => 'Choisissez une période pour ce prix :',
 	'champ_jour_debut_label' => 'Premier jour :',
 	'champ_jour_fin_label' => 'Dernier jour :',
@@ -34,10 +32,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_po_periodes' => '@nb@ périodes de prix',
 	'info_po_periodes_auteur' => 'Les périodes de prix de cet auteur',
 
+	// P
+	'periode_label' => 'Période :',
+
 	// R
 	'retirer_lien_po_periode' => 'Retirer cette période de prix',
 	'retirer_tous_liens_po_periodes' => 'Retirer toutes les périodes de prix',
 
+	// S
 	'supprimer_po_periode' => 'Supprimer cette période de prix',
 
 	// T
@@ -45,6 +47,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_changer_statut_po_periode' => 'Cette période de prix est :',
 	'texte_creer_associer_po_periode' => 'Créer et associer une période de prix',
 	'texte_definir_comme_traduction_po_periode' => 'Cette période de prix est une traduction de la période de prix numéro :',
+	'titre_choix_coincide' => 'Coïncidence',
+	'titre_choix_exclu' => 'Exclues',
 	'titre_langue_po_periode' => 'Langue de cette période de prix',
 	'titre_logo_po_periode' => 'Logo de cette période de prix',
 	'titre_objets_lies_po_periode' => 'Liés à cette période de prix',
