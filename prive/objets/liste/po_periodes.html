@@ -30,7 +30,7 @@
 					[(#JOUR_DEBUT|strlen|oui)
 						#SET{jour_debut, #JOUR_DEBUT|plus{1}}
 						#SET{jour_fin, #JOUR_FIN|plus{1}}
-						[(#VAL{spip:date_jour_#GET{jour_debut}}|_T)][ - (#JOUR_FIN|strlen|oui)[ (#VAL{spip:date_jour_#GET{jour_fin}}|_T)]]
+						[(#VAL{spip:date_jour_#GET{jour_debut}}|_T)][ <:dates_outils:date_au:> (#JOUR_FIN|strlen|oui)[ (#VAL{spip:date_jour_#GET{jour_fin}}|_T)]]
 					]
 				})]
 			</td>
