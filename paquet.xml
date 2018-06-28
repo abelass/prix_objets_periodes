@@ -1,7 +1,7 @@
 <paquet
 	prefix="prix_objets_periodes"
 	categorie="divers"
-	version="1.0.4"
+	version="1.0.5"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/prix_objets_periodes-64.png"
@@ -20,7 +20,7 @@
 	<necessite nom="saisies" compatibilite="[2.4.0;]" />
 	<necessite nom="verifier" compatibilite="[1.0.6;]" />
 	<necessite nom="prix_objets" compatibilite="[2.2.0;]" />
-	<necessite nom="dates_outils" compatibilite="[1.0.3;]" />
+	<necessite nom="dates_outils" compatibilite="[1.0.4;]" />
 
 	<pipeline nom="autoriser" inclure="prix_objets_periodes_autorisations.php" />
 

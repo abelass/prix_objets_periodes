@@ -32,9 +32,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_po_periodes' => '@nb@ périodes de prix',
 	'info_po_periodes_auteur' => 'Les périodes de prix de cet auteur',
 
-	// P
-	'periode_label' => 'Période :',
-
 	// R
 	'retirer_lien_po_periode' => 'Retirer cette période de prix',
 	'retirer_tous_liens_po_periodes' => 'Retirer toutes les périodes de prix',
