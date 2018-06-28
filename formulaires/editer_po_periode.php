@@ -95,7 +95,7 @@ function formulaires_editer_po_periode_saisies_dist() {
 			'saisie' => 'date',
 			'options' => array(
 				'nom' => 'date_debut',
-				'label' => _T('po_periode:champ_date_debut_label'),
+				'label' => _T('dates_outils:champ_date_debut_label'),
 				'afficher_si' => '@type@ == "date"',
 			)
 		),
@@ -112,7 +112,7 @@ function formulaires_editer_po_periode_saisies_dist() {
 			'saisie' => 'date',
 			'options' => array(
 				'nom' => 'date_fin',
-				'label' => _T('po_periode:champ_date_fin_label'),
+				'label' => _T('dates_outils:champ_date_fin_label'),
 				'afficher_si' => '@type@ == "date"',
 			)
 		),
