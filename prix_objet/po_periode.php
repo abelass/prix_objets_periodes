@@ -28,6 +28,8 @@ function prix_objet_po_periode_dist($id_po_periode, $contexte = array()) {
 			_request('date_debut') :
 			$date
 		);
+
+
 	$date_fin_contexte = isset($contexte['date_fin']) ?
 		$contexte['date_fin'] :
 		(
@@ -72,10 +74,22 @@ function prix_objet_po_periode_dist($id_po_periode, $contexte = array()) {
 			$jour_fin_periode = $donnees_periode['jour_fin'];
 			$jour_debut_contexte = date('w', strtotime($date_debut_contexte));
 			$jour_fin_contexte = date('w', strtotime($date_fin_contexte));
-			$dates_periode = array($jour_debut_periode, $jour_fin_periode);
+			$dates_periode = [];//array($jour_debut_periode, $jour_fin_periode);
+			if ($jour_fin_periode == 0) {
+				$jour_fin_periode = 7;
+			}
+
+			$i = $jour_debut_periode;
+			while ($i <= $jour_fin_periode) {
+				$jour = $i;
+				if ($jour == 7) {
+					$jour = 0;
+				}
+				$dates_periode[] = $jour;
+				$i++;
+			}
 			$dates_intervalle = dates_intervalle($date_debut_contexte, $date_fin_contexte, 0, 0, FALSE, 'w');
 			$coincidences = array_intersect($dates_periode, $dates_intervalle);
-
 			switch ($criteres) {
 				case 'coincide' :
 					if(count($coincidences) > 0) {

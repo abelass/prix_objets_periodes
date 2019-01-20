@@ -19,7 +19,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @pipeline prix_objets_extensions
  *
  * @param array $flux
- *        	Données du pipeline
+ *          Données du pipeline
  * @return array
  */
 function prix_objets_periodes_prix_objets_extensions($flux) {
