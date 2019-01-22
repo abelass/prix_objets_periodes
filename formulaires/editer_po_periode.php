@@ -3,7 +3,7 @@
  * Gestion du formulaire de d'édition de po_periode
  *
  * @plugin     Prix objets par périodes
- * @copyright  2018
+ * @copyright  2018 - 2019
  * @author     Rainer Müller
  * @licence    GNU/GPL v3
  * @package    SPIP\Prix_objets_periodes\Formulaires
