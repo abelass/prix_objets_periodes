@@ -95,6 +95,7 @@ function pop_upgrade($version_cible) {
 			unset($row['id_po_periode']);
 			unset($row['maj']);
 			unset($row['statut']);
+
 			$id_periode = sql_insertq('spip_periodes', $row);
 
 			// Adapter spip_prix_objets
