@@ -1,12 +1,12 @@
 <paquet
 	prefix="prix_objets_periodes"
 	categorie="divers"
-	version="1.0.6"
+	version="1.1.0"
 	etat="test"
 	compatibilite="[3.0.0;3.2.*]"
 	logo="prive/themes/spip/images/prix_objets_periodes-64.png"
 	documentation="https://github.com/abelass/prix_objets_periodes"
-	schema="1.0.2"
+	schema="1.1.0"
 >
 
 	<nom>Prix objets par périodes</nom>
@@ -18,18 +18,10 @@
 	<licence>GNU/GPL v3</licence>
 
 	<necessite nom="saisies" compatibilite="[2.4.0;]" />
-	<necessite nom="verifier" compatibilite="[1.0.6;]" />
 	<necessite nom="prix_objets" compatibilite="[2.2.0;]" />
 	<necessite nom="dates_outils" compatibilite="[1.0.4;]" />
+	<necessite nom="periodes" compatibilite="[1.0.0;]" />
 
-	<pipeline nom="autoriser" inclure="prix_objets_periodes_autorisations.php" />
-
-	<pipeline nom="declarer_tables_objets_sql" inclure="base/prix_objets_periodes.php" />
-	<pipeline nom="declarer_tables_interfaces" inclure="base/prix_objets_periodes.php" />
-
-	<pipeline nom="optimiser_base_disparus" inclure="prix_objets_periodes_pipelines.php" />
 	<pipeline nom="prix_objets_extensions" inclure="prix_objets_periodes_pipelines.php" />
 
-
-	<menu nom="po_periodes" titre="po_periode:titre_po_periodes" parent="menu_edition" icone="images/po_periode-16.png" action="po_periodes" />
 </paquet>

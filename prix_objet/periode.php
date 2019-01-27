@@ -16,11 +16,11 @@ if (!defined('_ECRIRE_INC_VERSION'))
 /**
  * Détermine si une extension est applicable pour un objet
  *
- * @param integer $id_po_periode
+ * @param integer $id_periode
  * @param array $contexte
  * @return boolean
  */
-function prix_objet_po_periode_dist($id_po_periode, $contexte = array()) {
+function prix_objet_periode_dist($id_periode, $contexte = array()) {
 	$date = date('Y-m-d H:s:m', time());
 	$date_debut_contexte = isset($contexte['date_debut']) ?
 		$contexte['date_debut'] :
@@ -28,7 +28,6 @@ function prix_objet_po_periode_dist($id_po_periode, $contexte = array()) {
 			_request('date_debut') :
 			$date
 		);
-
 
 	$date_fin_contexte = isset($contexte['date_fin']) ?
 		$contexte['date_fin'] :
@@ -39,7 +38,7 @@ function prix_objet_po_periode_dist($id_po_periode, $contexte = array()) {
 		);
 	$applicable = FALSE;
 
-	$donnees_periode = sql_fetsel('*', 'spip_po_periodes', 'id_po_periode=' . $id_po_periode);
+	$donnees_periode = sql_fetsel('*', 'spip_periodes', 'id_periode=' . $id_po_periode);
 	$type = trim($donnees_periode['type']);
 	$criteres = $donnees_periode['criteres'];
 	$operateur = !empty($donnees_periode['operateur']) ? $donnees_periode['operateur'] : '==';

@@ -32,28 +32,14 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 **/
 function prix_objets_periodes_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
-	# quelques exemples
-	# (que vous pouvez supprimer !)
-	#
-	# $maj['create'] = array(array('creer_base'));
-	#
-	# include_spip('inc/config')
-	# $maj['create'] = array(
-	#	array('maj_tables', array('spip_xx', 'spip_xx_liens')),
-	#	array('ecrire_config', 'prix_objets_periodes', array('exemple' => "Texte de l'exemple"))
-	#);
-	#
-	# $maj['1.1.0']  = array(array('sql_alter','TABLE spip_xx RENAME TO spip_yy'));
-	# $maj['1.2.0']  = array(array('sql_alter','TABLE spip_xx DROP COLUMN id_auteur'));
-	# $maj['1.3.0']  = array(
-	#	array('sql_alter','TABLE spip_xx CHANGE numero numero int(11) default 0 NOT NULL'),
-	#	array('sql_alter','TABLE spip_xx CHANGE texte petit_texte mediumtext NOT NULL default \'\''),
-	# );
-	# ...
+
 
 	$maj['create'] = array(array('maj_tables', array('spip_po_periodes')));
 	$maj['1.0.1'] = array(array('maj_tables', array('spip_po_periodes')));
 	$maj['1.0.2'] = array(array('maj_tables', array('spip_po_periodes')));
+	$maj['1.1.0'] = array(
+		array('pop_upgrade', '1.1.0'),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -90,4 +76,39 @@ function prix_objets_periodes_vider_tables($nom_meta_base_version) {
 	sql_delete('spip_forum', sql_in('objet', array('po_periode')));
 
 	effacer_meta($nom_meta_base_version);
+}
+
+/**
+ * Actualise la bd
+ *
+ * @param string $version_cible
+ *  la version de la bd
+ */
+function pop_upgrade($version_cible) {
+
+	// Les périodes sont gérés par le plugin périodes dorénavant.
+	if ($version_cible == '1.1.0') {
+		$sql = sql_select('*', 'spip_po_periodes');
+		// Alimenter la bd spip_periodes avec les contenus de spip_po_periodes.
+		while ($row = sql_fetch($sql)) {
+			$id_po_periode = $row['id_po_periode'];
+			unset($row['id_po_periode']);
+			unset($row['maj']);
+			unset($row['statut']);
+			$id_periode = sql_insertq('spip_periodes', $row);
+
+			// Adapter spip_prix_objets
+			sql_updateq(
+				'spip_prix_objets',
+				array(
+					'extension' => 'periode',
+					'id_extension' => $id_periode,
+				),
+				'extension LIKE ' . sql_quote('po_periode') . ' AND id_extension=' . $id_po_periode
+			);
+		}
+
+		// Effacer la table spip_po_periodes.
+		sql_drop_table('spip_po_periodes');
+	}
 }

@@ -1,9 +1,0 @@
-#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
-<div class="nettoyeur"></div>
-<h1><:po_periode:titre_po_periodes:></h1>
-
-<INCLURE{fond=prive/objets/liste/po_periodes, env, ajax, sinon=<:po_periode:info_aucun_po_periode:>}>
-
-[(#AUTORISER{creer,po_periode})
-	[(#URL_ECRIRE{po_periode_edit,new=oui}|icone_verticale{<:po_periode:icone_creer_po_periode:>,po_periode,new,right})]
-]

@@ -24,11 +24,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function prix_objets_periodes_prix_objets_extensions($flux) {
 
-	$flux['data']['po_periode'] = array (
+	$flux['data']['periode'] = array (
 		array(
-			'saisie' => 'po_periodes',
+			'saisie' => 'periodes',
 			'options' => array(
-				'nom' => 'id_prix_extension_po_periode',
+				'nom' => 'id_prix_extension_periode',
 				'label' => _T('po_periode:champ_id_prix_extension_po_periode'),
 				'option_intro' => _T('po_periode:info_aucun_po_periode'),
 				'defaut' => $flux['id_prix_extension_objet'],
@@ -39,29 +39,12 @@ function prix_objets_periodes_prix_objets_extensions($flux) {
 		array(
 			'saisie' => 'ajouter_action',
 			'options' => array(
-				'nom' => 'ajouter_po_periode',
-				'label_action' => _T('po_periode:icone_creer_po_periode'),
-				'objet' => 'po_periode',
+				'nom' => 'ajouter_periode',
+				'label_action' => _T('periode:icone_creer_periode'),
+				'objet' => 'periode',
 			)
 		),
 	);
-
-	return $flux;
-}
-
-
-/**
- * Optimiser la base de données
- *
- * Supprime les objets à la poubelle.
- *
- * @pipeline optimiser_base_disparus
- * @param  array $flux Données du pipeline
- * @return array       Données du pipeline
- */
-function prix_objets_periodes_optimiser_base_disparus($flux) {
-
-	sql_delete('spip_po_periodes', "statut='poubelle' AND maj < " . $flux['args']['date']);
 
 	return $flux;
 }
