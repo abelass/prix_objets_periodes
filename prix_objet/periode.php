@@ -44,8 +44,23 @@ function prix_objet_periode_dist($id_periode, $contexte = array()) {
 	$criteres = $donnees_periode['criteres'];
 	$operateur = !empty($donnees_periode['operateur']) ? $donnees_periode['operateur'] : '==';
 	$operateur_2 = !empty($donnees_periode['operateur_2']) ? $donnees_periode['operateur_2'] : '==';
-	$date_debut_periode = $donnees_periode['date_debut'];
-	$date_fin_periode = $donnees_periode['date_fin'];
+
+	// Si date complète, on prend les dates tel que enrregistrés
+	if ($donnees_periode['date_complete'] == 'oui') {
+		$date_debut_periode = $donnees_periode['date_debut'];
+		$date_fin_periode = $donnees_periode['date_fin'];
+	}
+	// Sinon on complète les bouts manquants avec les données de la date actuelle.
+	else {
+		$date_debut_jour = $donnees_periode['date_debut_jour'] ? $donnees_periode['date_debut_jour'] : date('d');
+		$date_debut_mois = $donnees_periode['date_debut_mois'] ? $donnees_periode['date_debut_mois'] : date('m');
+		$date_debut_annee = $donnees_periode['date_debut_annee'] ? $donnees_periode['date_debut_annee'] : date('Y');
+		$date_fin_jour = $donnees_periode['date_fin_jour'] ? $donnees_periode['date_fin_jour'] : date('d');
+		$date_fin_mois = $donnees_periode['date_fin_mois'] ? $donnees_periode['date_fin_mois'] : date('m');
+		$date_fin_annee = $donnees_periode['date_fin_annee'] ? $donnees_periode['date_fin_annee'] : date('Y');
+		$date_debut_periode = date('Y-m-d H:i:s', strtotime("$date_debut_annee-$date_debut_mois-$date_debut_jour 00:00:00"));
+		$date_fin_periode = date('Y-m-d H:i:s', strtotime("$date_fin_annee-$date_fin_mois-$date_fin_jour 00:00:00"));
+	}
 
 	switch ($type) {
 		case 'date':
