@@ -11,7 +11,7 @@ Extension pour [Prix objets](https://plugins.spip.net/prix_objets) qui permet de
 ### Définir une période
 Définissez vos périodes sous Édition/Périodes de prix
 
-Choisissiez d'abord le type de période :
+Choisissez d'abord le type de période :
 - Dates
 - Jour de semaine
 
