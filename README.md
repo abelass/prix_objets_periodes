@@ -10,7 +10,7 @@ Extension pour [Prix objets](https://plugins.spip.net/prix_objets) qui permet de
 
 ## Utilisation
 ### Définir une période
-Définissez vos périodes sous Édition/Périodes de prix
+Définissez vos périodes sous Édition/Périodes
 
 Choisissez d'abord le type de période :
 - Dates
