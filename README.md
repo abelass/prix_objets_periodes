@@ -5,6 +5,7 @@ Extension pour [Prix objets](https://plugins.spip.net/prix_objets) qui permet de
 - [Saisies](https://plugins.spip.net/saisies.html)
 - [Vérifier](https://plugins.spip.net/verifier.html)
 - [Prix objets](https://plugins.spip.net/prix_objets)
+- [Périodes](https://plugins.spip.net/periodes.html)
 - [Dates outils](https://plugins.spip.net/dates_outils.html)
 
 ## Utilisation
