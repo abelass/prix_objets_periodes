@@ -9,6 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
   // P
   'prix_objets_periodes_description' => 'Adapter les prix selon la/les date/s choisis',
-  'prix_objets_periodes_nom' => 'Prix objets par périodes',
+  'prix_objets_periodes_nom' => 'Périodes de prix',
   'prix_objets_periodes_slogan' => 'Des prix selon la date',
 );
